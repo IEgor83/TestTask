@@ -1,0 +1,17 @@
+<h1>{{ menu_name }}</h1>
+<ul>
+    {% for item in menu_items %}
+        <li class="{% if item.is_active %}active{% endif %} {% if item.is_expanded %}expanded{% endif %}">
+            <a href="/{{ menu_name }}/{{ item.get_url }}">{{ item.name }}</a>
+            {% if item.children.all %}
+                <ul>
+                    {% for child in item.children.all %}
+                        <li class="{% if child.is_active %}active{% endif %} {% if child.is_expanded %}expanded{% endif %}">
+                            <a href="/{{ menu_name }}/{{ child.get_url }}">{{ child.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
